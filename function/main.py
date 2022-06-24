@@ -30,13 +30,14 @@ def handler(event="", context=""):
         "body": "Execution finished. Check CloudWatch Logs for more info",
     }
 
-    SLACK_API_TOKEN, OPSGENIE_API_TOKEN = local()
+    # local testing
+    # SLACK_API_TOKEN, OPSGENIE_API_TOKEN = local()
 
-    # secret_arn = os.environ.get("SECRET_ARN")
-    # apiKeysString = aws_get_secret.get_secret(secret_arn)
-    # apiKeys = json.loads(apiKeysString)
-    # SLACK_API_TOKEN = apiKeys["slack"]
-    # OPSGENIE_API_TOKEN = apiKeys["opsgenie"]
+    secret_arn = os.environ.get("SECRET_ARN")
+    apiKeysString = aws_get_secret.get_secret(secret_arn)
+    apiKeys = json.loads(apiKeysString)
+    SLACK_API_TOKEN = apiKeys["slack"]
+    OPSGENIE_API_TOKEN = apiKeys["opsgenie"]
 
     mappingsFile = configparser.ConfigParser()
     mappingsFile.read("./mappings.ini")
